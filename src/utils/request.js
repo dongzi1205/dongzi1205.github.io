@@ -16,7 +16,12 @@ service.interceptors.request.use(
             if (config.url.indexOf("?") >= 0) {
                 sp = "&"
             }
-            config.url = config.url + sp + "access_token=" + token
+            // 取消直接通过access_token的校验方式
+            // config.url = config.url + sp + "access_token=" + token
+            // 使用Authorization的授权
+            config.headers = {
+                'Authorization': 'token ' + token
+            }
         }
         return config
     },
